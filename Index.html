@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alicia Lee Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: sans-serif;
+    }
+
+    body {
+      display: grid;
+      grid-template-columns: 0.075fr 1fr 3fr;
+      grid-template-rows: 1fr;
+      min-height: 100vh;
+      padding: 0; 
+      margin: 0; 
+    }
+
+    .cell {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .first-column {
+      padding: 0.5rem;
+      border-right: 2px solid black;
+    }
+
+    /* Add padding to the second column */
+    .cell:nth-child(2) {
+      padding-left: 20px; /* Adjust this value as needed */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Push content to the top and bottom */
+      padding-bottom: 20px; /* Add bottom padding */
+    }
+
+    .scroll-text {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      animation: scroll 16s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateY(-300%) rotate(180deg); }
+      100% { transform: translateY(600%) rotate(180deg); }
+    }
+
+    .static-vertical {
+      writing-mode: horizontal-tb;
+      text-align: left;
+      white-space: nowrap;
+      line-height: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0.25rem;
+      flex-grow: 1; /* Allow this section to take up available space */
+    }
+
+    .static-vertical span {
+      font-weight: normal;
+    }
+
+    .static-vertical .bold {
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+
+    .button {
+      padding: 10px 20px;
+      border: 2px solid black;
+      border-radius: 20px;
+      background-color: white;
+      cursor: pointer;
+      font-weight: bold;
+      align-self: flex-start;
+      margin-top: auto; /* Ensure it stays at the bottom */
+    }
+
+    .project-container {
+      padding: 0; 
+      margin: 0; 
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      width: 100%;
+      gap: 0;
+      padding: 0; 
+      margin-top: 0; 
+      min-height: 100vh;
+      position: relative; /* Needed for stacking */
+    }
+
+    .project-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      display: block;
+      transition: all 0.3s ease;
+      z-index: 1; /* Normal z-index */
+    }
+
+    .project-grid img:hover {
+      transform: scale(1.1); /* Slightly increase size */
+      border-radius: 15px; /* More pronounced rounded corners on hover */
+      z-index: 10; /* Bring hovered item to the front */
+    }
+
+    @media (min-width: 1200px) {
+      .project-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 750px) {
+      html, body {
+        overflow: auto;
+        height: auto;
+      }
+
+      body {
+        display: block;
+      }
+
+      .first-column {
+        display: none;
+      }
+
+      .scroll-text {
+        writing-mode: horizontal-tb;
+        transform: none;
+        animation: none;
+        text-align: center;
+        padding-bottom: 1rem;
+      }
+
+      .static-vertical {
+        white-space: normal;
+        line-height: 1.5;
+      }
+
+      .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        height: auto;
+      }
+
+      .project-grid img {
+        aspect-ratio: 1 / 1;
+      }
+    }
+
+    @media (min-width: 751px) and (max-width: 1199px) {
+      .project-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cell first-column">
+    <div class="scroll-text">alicia888lee@gmail.com</div>
+  </div>
+
+  <div class="cell">
+    <div class="static-vertical">
+      <span class="bold">ALICIA LEE</span><br />TOUCH<br />FEEL<br />SEE<br />ME
+      <button class="button">ROLL THE DICE</button>
+    </div>
+  </div>
+
+  <div class="cell project-container">
+    <div class="project-grid">
+      <img src="photos/pigeongrill copy.jpg" alt="mushi mushi">
+      <img src="photos/snake copy.jpg" alt="Swizzy the Snake">
+      <img src="photos/dinnerwithfriends.jpg" alt="Dinner with Friends">
+      <img src="Photos/IMG_2041 2 1 copy.jpg" alt="Project 4">
+      <img src="Photos/Screenshot 2024-12-29 at 3.39.36 AM copy.jpg" alt="Project 5">
+      <img src="Photos/Screenshot 2024-12-29 at 4.35.42 AM copy.jpg" alt="Project 6">
+      <img src="Photos/Screenshot 2025-04-29 at 11.26.55 AM.jpg" alt="Project 7">
+      <img src="Photos/lightrender copy.jpg" alt="Project 8">
+      <img src="Photos/cig-01.jpg" alt="Project 9">
+    </div>
+  </div>
+</body>
+</html>
