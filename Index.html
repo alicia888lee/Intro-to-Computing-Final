@@ -37,13 +37,14 @@
       border-right: 2px solid black;
     }
 
-    /* Add padding to the second column */
     .cell:nth-child(2) {
-      padding-left: 20px; /* Adjust this value as needed */
+      padding-left: 20px;
+      padding-bottom: 20px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between; /* Push content to the top and bottom */
-      padding-bottom: 20px; /* Add bottom padding */
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
     }
 
     .scroll-text {
@@ -66,7 +67,7 @@
       flex-direction: column;
       justify-content: space-between;
       padding: 0.25rem;
-      flex-grow: 1; /* Allow this section to take up available space */
+      flex-grow: 1;
     }
 
     .static-vertical span {
@@ -86,14 +87,15 @@
       cursor: pointer;
       font-weight: bold;
       align-self: flex-start;
-      margin-top: auto; /* Ensure it stays at the bottom */
+      margin-top: auto;
     }
 
-    .project-container {
-      padding: 0; 
-      margin: 0; 
+    .cell.project-container {
+      padding: 0;
+      margin: 0;
       height: 100%;
-      overflow: hidden;
+      overflow: visible; /* Allow overflow for hover effect */
+      position: relative;
     }
 
     .project-grid {
@@ -102,10 +104,12 @@
       grid-template-rows: auto;
       width: 100%;
       gap: 0;
-      padding: 0; 
-      margin-top: 0; 
+      padding: 0;
+      margin-top: 0;
       min-height: 100vh;
-      position: relative; /* Needed for stacking */
+      position: relative;
+      overflow: visible; /* Also allow overflow here */
+      z-index: 0;
     }
 
     .project-grid img {
@@ -114,14 +118,14 @@
       object-fit: cover;
       aspect-ratio: 1 / 1;
       display: block;
-      transition: all 0.3s ease;
-      z-index: 1; /* Normal z-index */
+      transition: all 0.1s ease;
+      z-index: 1;
     }
 
     .project-grid img:hover {
-      transform: scale(1.1); /* Slightly increase size */
-      border-radius: 15px; /* More pronounced rounded corners on hover */
-      z-index: 10; /* Bring hovered item to the front */
+      transform: scale(1.1);
+      border-radius: 15px;
+      z-index: 100;
     }
 
     @media (min-width: 1200px) {
