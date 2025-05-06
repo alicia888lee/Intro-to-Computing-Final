@@ -7,7 +7,6 @@
   <link rel='stylesheet' href="style.css">
 </head>
 <body>
-  <div id="loading-screen">Loading Alicia Lee...</div>
 
   <div class="cell first-column">
     <div class="scroll-text">alicia888lee@gmail.com</div>
@@ -111,13 +110,6 @@
       });
     });
 
-    // LOADING SCREEN LOGIC
-    window.addEventListener("load", () => {
-      const loadingScreen = document.getElementById("loading-screen");
-      loadingScreen.classList.add("fade-out");
-      setTimeout(() => loadingScreen.remove(), 500);
-    });
-   
     // Filter functionality for TOUCH, FEEL, SEE categories
     document.querySelectorAll('.filter-link').forEach(link => {
       link.addEventListener('click', (e) => {
@@ -154,7 +146,6 @@
         }
       });
     });
-
   </script>
 </body>
 </html>
