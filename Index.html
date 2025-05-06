@@ -4,9 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alicia Lee Portfolio</title>
-  <link rel='stylesheet' href="style.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div class="intro">
+        <h1 class="logo-header">
+          <span class="logo">ALICIA </span><span class="logo"> LEE.</span>
+        </h1>
+    </div>
 
   <div class="cell first-column">
     <div class="scroll-text">alicia888lee@gmail.com</div>
@@ -146,6 +152,35 @@
         }
       });
     });
-  </script>
+
+    let intro = document.querySelector('.intro');
+    let logo = document.querySelector ('.logo-header');
+  let logoSpan = document.querySelectorAll('.logo');
+
+  window.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      logoSpan.forEach((span, idx) => {
+        setTimeout(() => {
+          span.classList.add('active');
+        }, (idx+1) * 400) 
+      });
+
+    setTimeout(() => {
+      logoSpan.forEach((span,idx) => {
+        setTimeout (() =>{
+        span.classList.remove('active');
+        span.classList.add('fade');
+      }, (idx +1)*50)
+    })
+    }, 2000); 
+
+    setTimeout(() => {
+      intro.style.top = '-100vh'; 
+    }, 2300) 
+  })
+})
+    
+</script>
+
 </body>
 </html>
