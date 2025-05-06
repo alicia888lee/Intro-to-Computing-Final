@@ -4,207 +4,157 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Alicia Lee Portfolio</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      overflow: hidden;
-      font-family: sans-serif;
-    }
-
-    body {
-      display: grid;
-      grid-template-columns: 0.075fr 1fr 3fr;
-      grid-template-rows: 1fr;
-      min-height: 100vh;
-      padding: 0; 
-      margin: 0; 
-    }
-
-    .cell {
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .first-column {
-      padding: 0.5rem;
-      border-right: 2px solid black;
-    }
-
-    .cell:nth-child(2) {
-      padding-left: 20px;
-      padding-bottom: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      z-index: 1;
-    }
-
-    .scroll-text {
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
-      animation: scroll 16s linear infinite;
-    }
-
-    @keyframes scroll {
-      0% { transform: translateY(-300%) rotate(180deg); }
-      100% { transform: translateY(600%) rotate(180deg); }
-    }
-
-    .static-vertical {
-      writing-mode: horizontal-tb;
-      text-align: left;
-      white-space: nowrap;
-      line-height: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 0.25rem;
-      flex-grow: 1;
-    }
-
-    .static-vertical span {
-      font-weight: normal;
-    }
-
-    .static-vertical .bold {
-      font-weight: bold;
-      font-size: 1.3rem;
-    }
-
-    .button {
-      padding: 10px 20px;
-      border: 2px solid black;
-      border-radius: 20px;
-      background-color: white;
-      cursor: pointer;
-      font-weight: bold;
-      align-self: flex-start;
-      margin-top: auto;
-    }
-
-    .cell.project-container {
-      padding: 0;
-      margin: 0;
-      height: 100%;
-      overflow: visible; /* Allow overflow for hover effect */
-      position: relative;
-    }
-
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: auto;
-      width: 100%;
-      gap: 0;
-      padding: 0;
-      margin-top: 0;
-      min-height: 100vh;
-      position: relative;
-      overflow: visible; /* Also allow overflow here */
-      z-index: 0;
-    }
-
-    .project-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      aspect-ratio: 1 / 1;
-      display: block;
-      transition: all 0.1s ease;
-      z-index: 1;
-    }
-
-    .project-grid img:hover {
-      transform: scale(1.1);
-      border-radius: 15px;
-      z-index: 100;
-    }
-
-    @media (min-width: 1200px) {
-      .project-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    @media (max-width: 750px) {
-      html, body {
-        overflow: auto;
-        height: auto;
-      }
-
-      body {
-        display: block;
-      }
-
-      .first-column {
-        display: none;
-      }
-
-      .scroll-text {
-        writing-mode: horizontal-tb;
-        transform: none;
-        animation: none;
-        text-align: center;
-        padding-bottom: 1rem;
-      }
-
-      .static-vertical {
-        white-space: normal;
-        line-height: 1.5;
-      }
-
-      .project-grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto;
-        height: auto;
-      }
-
-      .project-grid img {
-        aspect-ratio: 1 / 1;
-      }
-    }
-
-    @media (min-width: 751px) and (max-width: 1199px) {
-      .project-grid {
-        grid-template-columns: repeat(3, 1fr);
-        grid-template-rows: auto;
-        height: auto;
-      }
-    }
-  </style>
+  <link rel='stylesheet' href="style.css">
 </head>
 <body>
+  <div id="loading-screen">Loading Alicia Lee...</div>
+
   <div class="cell first-column">
     <div class="scroll-text">alicia888lee@gmail.com</div>
   </div>
 
   <div class="cell">
     <div class="static-vertical">
-      <span class="bold">ALICIA LEE</span><br />TOUCH<br />FEEL<br />SEE<br />ME
+        <span class="name-variable">ALICIA LEE</span><br />
+        <a href="#" class="nav-link filter-link" data-filter="touch">TOUCH</a><br />
+        <a href="#" class="nav-link filter-link" data-filter="feel">FEEL</a><br />
+        <a href="#" class="nav-link filter-link" data-filter="see">SEE</a><br />
+        <a href="me.html" class="nav-link">ME</a>
       <button class="button">ROLL THE DICE</button>
     </div>
   </div>
 
   <div class="cell project-container">
     <div class="project-grid">
-      <img src="photos/pigeongrill copy.jpg" alt="mushi mushi">
-      <img src="photos/snake copy.jpg" alt="Swizzy the Snake">
-      <img src="photos/dinnerwithfriends.jpg" alt="Dinner with Friends">
-      <img src="Photos/IMG_2041 2 1 copy.jpg" alt="Project 4">
-      <img src="Photos/Screenshot 2024-12-29 at 3.39.36 AM copy.jpg" alt="Project 5">
-      <img src="Photos/Screenshot 2024-12-29 at 4.35.42 AM copy.jpg" alt="Project 6">
-      <img src="Photos/Screenshot 2025-04-29 at 11.26.55 AM.jpg" alt="Project 7">
-      <img src="Photos/lightrender copy.jpg" alt="Project 8">
-      <img src="Photos/cig-01.jpg" alt="Project 9">
+      <!-- TOUCH: 1,2,8,9 -->
+      <img src="photos/pigeongrill copy.jpg" alt="mushi mushi" class="touch" data-note="C4">
+      <img src="photos/snake copy.jpg" alt="Swizzy the Snake" class="touch" data-note="D4">
+
+      <!-- FEEL: 3,4 -->
+      <img src="photos/dinnerwithfriends.jpg" alt="Dinner with Friends" class="feel" data-note="E4">
+      <img src="Photos/IMG_2041 2 1 copy.jpg" alt="Project 4" class="feel" data-note="F4">
+
+      <!-- SEE: 5,6,7 -->
+      <img src="Photos/Screenshot 2024-12-29 at 3.39.36 AM copy.jpg" alt="Project 5" class="see" data-note="G4">
+      <img src="Photos/Screenshot 2024-12-29 at 4.35.42 AM copy.jpg" alt="Project 6" class="see" data-note="A4">
+      <img src="Photos/Screenshot 2025-04-29 at 11.26.55 AM.jpg" alt="Project 7" class="see" data-note="B4">
+
+      <!-- TOUCH: 8,9 -->
+      <img src="Photos/lightrender copy.jpg" alt="Project 8" class="touch" data-note="C5">
+      <img src="Photos/cig-01.jpg" alt="Project 9" class="touch" data-note="D5">
     </div>
   </div>
+
+  <script>
+    // AUDIO TRIGGER ON HOVER
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playNote(note) {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      const filter = audioContext.createBiquadFilter();
+      const distortion = audioContext.createWaveShaper();
+      const delay = audioContext.createDelay();
+
+      oscillator.connect(distortion);
+      distortion.connect(filter);
+      filter.connect(delay);
+      delay.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      oscillator.type = "square";
+      oscillator.frequency.setValueAtTime(noteToFrequency(note), audioContext.currentTime);
+      gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+
+      filter.type = "lowpass";
+      filter.frequency.setValueAtTime(1000, audioContext.currentTime);
+
+      distortion.curve = makeDistortionCurve(400);
+      distortion.oversample = '5x';
+
+      delay.delayTime.value = 0;
+
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.17);
+    }
+
+    function makeDistortionCurve(amount) {
+      const n_samples = 44100;
+      const curve = new Float32Array(n_samples);
+      const deg = Math.PI / 180;
+      for (let i = 0; i < n_samples; ++i) {
+        const x = i * 2 / n_samples - 1;
+        curve[i] = (3 + amount) * x * 20 * deg / (Math.PI + amount * Math.abs(x));
+      }
+      return curve;
+    }
+
+    function noteToFrequency(note) {
+      const notes = {
+        "C4": 261.63,
+        "D4": 293.66,
+        "E4": 329.63,
+        "F4": 349.23,
+        "G4": 392.00,
+        "A4": 440.00,
+        "B4": 493.88,
+        "C5": 523.25,
+        "D5": 587.33
+      };
+      return notes[note] || 440;
+    }
+
+    document.querySelectorAll('.project-grid img').forEach(img => {
+      img.addEventListener('mouseenter', (e) => {
+        const note = e.target.getAttribute('data-note');
+        playNote(note);
+      });
+    });
+
+    // LOADING SCREEN LOGIC
+    window.addEventListener("load", () => {
+      const loadingScreen = document.getElementById("loading-screen");
+      loadingScreen.classList.add("fade-out");
+      setTimeout(() => loadingScreen.remove(), 500);
+    });
+   
+    // Filter functionality for TOUCH, FEEL, SEE categories
+    document.querySelectorAll('.filter-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filter = e.target.getAttribute('data-filter');
+        const grid = document.querySelector('.project-grid');
+        
+        // If the filter is already active, remove it and show all images
+        if (e.target.classList.contains('active-filter')) {
+          e.target.classList.remove('active-filter');
+          grid.classList.remove('filtered');
+          
+          // Show all images and remove highlights
+          document.querySelectorAll('.project-grid img').forEach(img => {
+            img.classList.remove('highlight');
+            img.style.filter = 'brightness(1)'; // Reset brightness
+          });
+        } else {
+          // Add the active filter class to the clicked filter
+          document.querySelectorAll('.filter-link').forEach(link => link.classList.remove('active-filter')); // Remove active from all
+          e.target.classList.add('active-filter'); // Add active to the clicked link
+          grid.classList.add('filtered');
+          
+          // Show only images matching the filter
+          document.querySelectorAll('.project-grid img').forEach(img => {
+            if (img.classList.contains(filter)) {
+              img.classList.add('highlight'); // Highlight matching images
+              img.style.filter = 'brightness(1)'; // Set normal brightness
+            } else {
+              img.classList.remove('highlight'); // Remove highlight from non-matching images
+              img.style.filter = 'brightness(0.4)'; // Darken non-matching images
+            }
+          });
+        }
+      });
+    });
+
+  </script>
 </body>
 </html>
