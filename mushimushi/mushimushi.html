@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alicia Lee Portfolio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'BentonSans Light', sans-serif;
+      overflow: hidden; /* Prevent full page scroll */
+    }
+    .grid-wrapper {
+  display: grid;
+  grid-template-columns: min-content 200px 1fr; /* shrink left column */
+  height: 100vh;
+}
+
+.left-column {
+  background: white;
+  border-right: 2px solid black;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 4px; /* tiny horizontal padding */
+}
+
+    .scroll-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    animation: scroll 16s linear infinite;
+    justify-content: center;
+  }
+  
+  @keyframes scroll {
+    0% { transform: translateY(-300%) rotate(180deg); }
+    100% { transform: translateY(600%) rotate(180deg); }
+  }
+
+    /* MIDDLE COLUMN: Navigation */
+    .middle-column {
+      border-right: 2px solid black;
+      position: sticky;
+    text-align: left;
+    white-space: nowrap;
+    line-height: 3;
+    display: flex;
+    flex-direction: column;
+    padding: 0.24rem;
+    flex-grow: 1;
+    margin-left: 10px;
+    }
+
+    .middle-column .name {
+      color: black;
+      font-family: 'BentonSans Black';
+      font-size: 1.6rem;
+      padding-top: 10px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: black;
+      font-size: 0.9rem;
+    }
+
+    .nav-link:hover {
+      color: gray;
+    }
+
+    /* RIGHT COLUMN: Scrollable content */
+    .right-column {
+      padding: 0;
+      overflow-y: auto;
+      height: 100vh;
+    }
+
+    .project-title {
+      font-size: 2rem;
+      margin: 20px;
+      font-family: 'BentonSans Black';
+    }
+
+    .title-img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+  .button {
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: white;
+    cursor: pointer;
+    font-weight: bold;
+    align-self: flex-start;
+    margin-top: auto;
+    position: fixed;
+  bottom: 20px;
+  }
+
+  .button:hover {
+    transform: scale(1.08);
+    transition: transform 0.2s ease;
+  }
+  
+  .button:active {
+    background-color: black;
+    color: white;
+    border-color: white;
+  }
+  </style>
+</head>
+<body>
+  <div class="grid-wrapper">
+    <div class="left-column">
+      <div class="scroll-text">alicia888lee@gmail.com</div>
+    </div>
+
+    <div class="middle-column">
+      <div class="name">ALICIA LEE</div>
+      <a href="/Homepage/Index.html" class="nav-link">TOUCH</a>
+      <a href="/Homepage/Index.html" class="nav-link">FEEL</a>
+      <a href="/Homepage/Index.html" class="nav-link">SEE</a>
+      <button class="button">ME</button>
+    </div>
+    
+
+    <div class="right-column">
+      <img class="title-img" src="Photos/pigeongrill copy 2.jpg" alt="Image Placeholder" />
+      <div class="project-title">mushi mushi</div>
+      <p style="margin-top: 1000px;">content</p>
+    </div>
+  </div>
+</body>
+</html>

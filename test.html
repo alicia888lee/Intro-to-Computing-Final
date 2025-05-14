@@ -6,11 +6,274 @@
   <title>Alicia Lee Portfolio</title>
   <link rel="stylesheet" href="style.css">
 </head>
+<style>
+  /* Remove the loading screen styles */
+body {
+    margin: 0;
+    padding: 0;
+    color: black;
+    font-family: 'BentonSans Light', sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    display: grid;
+    grid-template-columns: 0.075fr 1fr 3fr;
+    grid-template-rows: 1fr;
+    min-height: 100vh;
+  }
+  
+  .cell {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    padding-left: 18px;
+  }
+  
+  .first-column {
+    border-right: 2px solid black; 
+  }
+  
+  .cell:nth-child(2) {
+    padding-left: 20px;
+    padding-bottom: 20px;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+  }
+  
+  .scroll-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    animation: scroll 16s linear infinite;
+  }
+  
+  @keyframes scroll {
+    0% { transform: translateY(-300%) rotate(180deg); }
+    100% { transform: translateY(600%) rotate(180deg); }
+  }
+  
+  .static-vertical {
+    writing-mode: horizontal-tb;
+    text-align: left;
+    white-space: nowrap;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.25rem;
+    flex-grow: 1;
+  }
+  
+  .static-vertical span {
+    font-weight: normal;
+  }
+  
+  .static-vertical .bold {
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: white;
+    cursor: pointer;
+    font-weight: bold;
+    align-self: flex-start;
+    margin-top: auto;
+    position: fixed;
+  bottom: 20px;
+  }
+  
+  .cell.project-container {
+    height: 100%;
+    overflow: visible;
+    position: relative;
+  }
+  
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    min-height: 100vh;
+  }
+  
+  .project-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+    display: block;
+    transition: transform 0.03s ; 
+  }
+  
+  .project-grid img:hover {
+    transform: scale(1.08);
+    border-radius: 15px;
+    z-index: 100;
+  }
+  
+  @media (min-width: 1200px) {
+    .project-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  @media (max-width: 750px) {
+    html, body {
+      overflow: auto;
+      height: auto;
+    }
+  
+    body {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+  
+    .first-column {
+      display: none;
+    }
+  
+    .scroll-text {
+      writing-mode: horizontal-tb;
+      transform: none;
+      animation: none;
+      text-align: center;
+      padding-bottom: 1rem;
+      align-items: center;
+    }
+  
+    .static-vertical {
+      white-space: normal;
+      line-height: 1.5;
+    }
+  
+    .project-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .button:hover {
+    transform: scale(1.08);
+    transition: transform 0.2s ease;
+  }
+  
+  .button:active {
+    background-color: black;
+    color: white;
+    border-color: white;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: black;
+    transition: color 0.2s;
+    font-size: .8rem;
+  }
+  
+  .nav-link:hover {
+    color: darkgray;
+  }
+  
+  .project-grid.filtered img {
+    position: relative;
+  }
+  
+  .project-grid.filtered img::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* Darker overlay */
+    z-index: 10; /* Ensure overlay is above the image */
+  }
+  
+  .project-grid img:hover {
+    transform: scale(1.08);
+    border-radius: 15px;
+    z-index: 100;
+  }
+  
+  /* INTRO */
+  header {
+    position:relative;
+    left:0;
+    top:0;
+width: 1005;
+height: 80px;
+  }
+
+  header h4 {
+    position: absolute;
+    left: 10%;
+    bottom: 1rem;
+    font-size: 1.6rem;
+  }
+  .intro {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #161616;
+    transition: 1s;
+  }
+  
+  .logo-header {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    src: url('BentonSans\ Black.otf') format('opentype');
+    font-family: 'BentonSans Black';
+  }
+
+  .name {
+    color: black;
+    src: url('BentonSans\ Black.otf') format('opentype');
+    font-family: 'BentonSans Black';
+    font-size: 1.6rem;
+    padding-top: 20px;
+  }
+  
+  .logo {
+    position: relative;
+    display: inline-block;
+    bottom: -20px;
+    opacity: 0;
+  }
+  
+  .logo.active {
+    bottom: 0;
+    opacity: 1;
+    transition: ease-in-out .5s;
+  }
+  
+  .logo.fade {
+    bottom: 150px;
+    opacity: 0;
+    transition: ease-in-out .5s;
+  }
+</style>
 <body>
 
     <div class="intro">
         <h1 class="logo-header">
-          <span class="logo">ALICIA </span><span class="logo"> LEE.</span>
+          <span class="logo">ALICIA&nbsp;&nbsp;</span><span class="logo">&nbsp;&nbsp;LEE.</span>
         </h1>
     </div>
 
@@ -20,19 +283,20 @@
 
   <div class="cell">
     <div class="static-vertical">
-        <span class="name-variable">ALICIA LEE</span><br />
+        <span class="name">ALICIA LEE</span><br />
         <a href="#" class="nav-link filter-link" data-filter="touch">TOUCH</a><br />
         <a href="#" class="nav-link filter-link" data-filter="feel">FEEL</a><br />
         <a href="#" class="nav-link filter-link" data-filter="see">SEE</a><br />
-        <a href="me.html" class="nav-link">ME</a>
-      <button class="button">ROLL THE DICE</button>
     </div>
+    <button class="button">ME</button>
   </div>
 
   <div class="cell project-container">
     <div class="project-grid">
       <!-- TOUCH: 1,2,8,9 -->
-      <img src="photos/pigeongrill copy.jpg" alt="mushi mushi" class="touch" data-note="C4">
+       <a class="touch" href="/mushimushi/mushimushi.html">
+        <img src="photos/pigeongrill copy.jpg" alt="mushi mushi" data-note="C4">
+       </a>
       <img src="photos/snake copy.jpg" alt="Swizzy the Snake" class="touch" data-note="D4">
 
       <!-- FEEL: 3,4 -->

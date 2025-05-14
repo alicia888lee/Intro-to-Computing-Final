@@ -2,18 +2,16 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+    color: black;
+    font-family: 'BentonSans Light', sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
   }
   
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  html, body {
-    height: 100%;
-    font-family: sans-serif;
   }
   
   body {
@@ -26,11 +24,12 @@ body {
   .cell {
     display: flex;
     flex-direction: column;
+    align-self: flex-start;
+    padding-left: 18px;
   }
   
   .first-column {
-    padding: 0.5rem;
-    border-right: 2px solid black;
+    border-right: 2px solid black; 
   }
   
   .cell:nth-child(2) {
@@ -57,7 +56,7 @@ body {
     writing-mode: horizontal-tb;
     text-align: left;
     white-space: nowrap;
-    line-height: 2;
+    line-height: 1.5;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -83,6 +82,8 @@ body {
     font-weight: bold;
     align-self: flex-start;
     margin-top: auto;
+    position: fixed;
+  bottom: 20px;
   }
   
   .cell.project-container {
@@ -104,7 +105,7 @@ body {
     object-fit: cover;
     aspect-ratio: 1 / 1;
     display: block;
-    transition: all 0.03s;
+    transition: transform 0.03s ; 
   }
   
   .project-grid img:hover {
@@ -126,7 +127,8 @@ body {
     }
   
     body {
-      display: block;
+        display: grid;
+        grid-template-columns: 1fr 3fr;
     }
   
     .first-column {
@@ -139,6 +141,7 @@ body {
       animation: none;
       text-align: center;
       padding-bottom: 1rem;
+      align-items: center;
     }
   
     .static-vertical {
@@ -165,8 +168,8 @@ body {
   .nav-link {
     text-decoration: none;
     color: black;
-    font-weight: bold;
     transition: color 0.2s;
+    font-size: .8rem;
   }
   
   .nav-link:hover {
@@ -226,6 +229,16 @@ height: 80px;
     left: 50%;
     transform: translate(-50%, -50%);
     color: #ffffff;
+    src: url('BentonSans\ Black.otf') format('opentype');
+    font-family: 'BentonSans Black';
+  }
+
+  .name {
+    color: black;
+    src: url('BentonSans\ Black.otf') format('opentype');
+    font-family: 'BentonSans Black';
+    font-size: 1.6rem;
+    padding-top: 20px;
   }
   
   .logo {
@@ -246,3 +259,97 @@ height: 80px;
     opacity: 0;
     transition: ease-in-out .5s;
   }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'BentonSans Light', sans-serif;
+      overflow: hidden; /* Prevent full page scroll */
+    }
+    .grid-wrapper {
+  display: grid;
+  grid-template-columns: min-content 200px 1fr; /* shrink left column */
+  height: 100vh;
+}
+
+.left-column {
+  background: white;
+  border-right: 2px solid black;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 4px; /* tiny horizontal padding */
+}
+
+    .scroll-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    animation: scroll 16s linear infinite;
+    justify-content: center;
+  }
+  
+  @keyframes scroll {
+    0% { transform: translateY(-300%) rotate(180deg); }
+    100% { transform: translateY(600%) rotate(180deg); }
+  }
+
+    /* MIDDLE COLUMN: Navigation */
+    .middle-column {
+      border-right: 2px solid black;
+      position: sticky;
+    text-align: left;
+    white-space: nowrap;
+    line-height: 3;
+    display: flex;
+    flex-direction: column;
+    padding: 0.24rem;
+    flex-grow: 1;
+    margin-left: 10px;
+    }
+
+    .middle-column .name {
+      color: black;
+      font-family: 'BentonSans Black';
+      font-size: 1.6rem;
+      padding-top: 10px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: black;
+      font-size: 0.9rem;
+    }
+
+    .nav-link:hover {
+      color: gray;
+    }
+
+    /* RIGHT COLUMN: Scrollable content */
+    .right-column {
+      padding: 0;
+      overflow-y: auto;
+      height: 100vh;
+    }
+
+    .project-title {
+      font-size: 2rem;
+      margin: 20px;
+      font-family: 'BentonSans Black';
+    }
+
+    .title-img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
