@@ -180,6 +180,7 @@
       transition: transform 0.3s ease, color 0.3s ease;
       text-align: center;
       z-index: 10;
+      text-decoration: none;
     }
 
     .button:hover {
@@ -302,6 +303,7 @@
   line-height: 1.2;
   font-weight: 600;
   margin-top: 30px;
+  margin-bottom: 20px;
 }
 .left-details {
   flex: 3.3;   /* Make text column smaller */
@@ -374,6 +376,43 @@ body {
   user-select: auto;
   display: block;
 }
+
+.you-may-also-like {
+      margin-top: 40px;
+    }
+
+    .you-may-also-like h2 {
+      font-family: 'BentonSans Black', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .you-may-also-like div {
+      display: flex;
+    }
+    .you-may-also-like .desc-title {
+  border-top: 2px solid black;
+  padding-top: 10px;
+  margin-top: 40px; /* give some space above */
+}
+
+.you-may-also-like img {
+  width: 33%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.03s ease;
+  cursor: pointer;
+  aspect-ratio: 3 / 2; /* Changed from 3/4 to 3/2 for shorter height */
+  max-height: 200px;   /* Optional max height to keep consistent smaller height */
+}
+
+    .you-may-also-like img:hover {
+      transform: scale(1.07);
+      border-radius: 8px;
+    }
+
+
+
  </style>
 </head>
 <body>
@@ -406,8 +445,7 @@ body {
             <div class="eye"><div class="pupil"></div></div>
             <div class="eye"><div class="pupil"></div></div>
           </div>
-          <button class="button">ME</button>
-        </div>
+          <a button class="button" href="/About me/Index.html">ME</button></a>        </div>
       </div>
     </div>
 
@@ -436,13 +474,25 @@ body {
       <img src="Photos/Screenshot 2025-05-15 at 4.15.18 AM.png" alt="Extra image 2" />
     </div>
   </div>
+
+  <div class="desc-title"> Behind the Scenes</div>
   <div class="horizontal-scroll-container" id="carousel">
     <div class="slide" ><img src="Photos/Screenshot 2025-05-15 at 4.42.36 AM.png" alt="Slide 1"></div>
     <div class="slide" ><img src="Photos/Screenshot 2025-05-15 at 4.42.43 AM.png" alt="Slide 1"></div>
     <div class="slide" ><img src="Photos/Screenshot 2025-05-15 at 4.42.48 AM.png" alt="Slide 1"></div>
   </div>
+
+  <div class="you-may-also-like" aria-label="You may also like suggestions">
+    <div class="desc-title"> You May Also Like</div>
+    <div>
+      <img src="Photos/cig-01 copy.jpg" alt="Snake puzzle toy" />
+      <img src="Photos/IMG_2041 2 1 copy 2.jpg" alt="Custom leather parts" />
+      <img src="Photos/snake copy 2.jpg" alt="Ceramic grill design" />
+    </div>
+  </div>
 </div>
 </div>
+
 
   <script>
    const urlParams = new URLSearchParams(window.location.search);
