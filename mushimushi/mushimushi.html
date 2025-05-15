@@ -14,74 +14,189 @@
       padding: 0;
       height: 100%;
       font-family: 'BentonSans Light', sans-serif;
-      overflow: hidden; /* Prevent full page scroll */
+      overflow: hidden;
     }
+
     .grid-wrapper {
-  display: grid;
-  grid-template-columns: min-content 200px 1fr; /* shrink left column */
-  height: 100vh;
-}
-
-.left-column {
-  background: white;
-  border-right: 2px solid black;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 4px; /* tiny horizontal padding */
-}
-
-    .scroll-text {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    animation: scroll 16s linear infinite;
-    justify-content: center;
-  }
-  
-  @keyframes scroll {
-    0% { transform: translateY(-300%) rotate(180deg); }
-    100% { transform: translateY(600%) rotate(180deg); }
-  }
-
-    /* MIDDLE COLUMN: Navigation */
-    .middle-column {
-      border-right: 2px solid black;
-      position: sticky;
-    text-align: left;
-    white-space: nowrap;
-    line-height: 3;
-    display: flex;
-    flex-direction: column;
-    padding: 0.24rem;
-    flex-grow: 1;
-    margin-left: 10px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      height: 100vh;
     }
 
-    .middle-column .name {
+    .middle-column {
+      position: sticky;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      background: white;
+      z-index: 100;
+      padding: 40px 20px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 2px solid black; 
+    }
+
+    .name {
       color: black;
-      font-family: 'BentonSans Black';
+      font-family: 'BentonSans Black', sans-serif;
       font-size: 1.6rem;
-      padding-top: 10px;
+      line-height: 1.2;
+      margin: 0 0 20px 0;
+    }
+
+    .name-link {
+      font-size: 2rem;
+      font-family: 'BentonSans Black', sans-serif;
+      text-decoration: none;
+      color: black;
+    }
+
+    .name-link:hover {
+      color: gray;
+    }
+
+    .nav-links-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-top: 0.2rem;
     }
 
     .nav-link {
       text-decoration: none;
       color: black;
       font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
     }
 
     .nav-link:hover {
       color: gray;
     }
 
-    /* RIGHT COLUMN: Scrollable content */
+    .face-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 20px;
+      position: relative;
+    }
+
+    .face {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .face-circle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 180px;
+      border: 3px solid black;
+      border-radius: 50%;
+      background: white;
+      box-sizing: border-box;
+      z-index: 1;
+    }
+
+    .ear-left, .ear-right {
+      position: absolute;
+      top: 55px;
+      width: 40px;
+      height: 40px;
+      border: 3px solid black;
+      border-radius: 50%;
+      background: transparent;
+      box-sizing: border-box;
+      z-index: 0;
+    }
+
+    .ear-left {
+      left: calc(50% - 100px);
+    }
+
+    .ear-right {
+      left: calc(50% + 65px);
+    }
+
+    .eyes {
+      display: flex;
+      gap: 20px;
+      z-index: 10;
+    }
+
+    .eye {
+      width: 50px;
+      height: 50px;
+      background: white;
+      border: 3px solid black;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .pupil {
+      width: 22px;
+      height: 22px;
+      background: black;
+      border-radius: 50%;
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      animation: lookAround 6s infinite ease-in-out;
+      z-index: 11;
+    }
+
+    @keyframes lookAround {
+      0%, 100% { top: 14px; left: 14px; }
+      25% { top: 5px; left: 5px; }
+      50% { top: 14px; left: 35px; }
+      75% { top: 35px; left: 14px; }
+    }
+
+    .button {
+      position: relative;
+      padding: 20px 30px;
+      border: none;
+      background-color: black;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      line-height: 1;
+      color: white;
+      box-shadow: inset 0 5px 10px -4px rgba(255, 255, 255, 0.15);
+      transition: transform 0.3s ease, color 0.3s ease;
+      text-align: center;
+      z-index: 10;
+    }
+
+    .button:hover {
+      transform: scale(1.08);
+      color: red;
+    }
+
     .right-column {
-      padding: 0;
       overflow-y: auto;
       height: 100vh;
+    }
+
+    .title-img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
     }
 
     .project-title {
@@ -89,60 +204,201 @@
       margin: 20px;
       font-family: 'BentonSans Black';
     }
+    .nav-link.active-filter {
+  font-weight: bold;
+  color: red;
+  text-decoration: underline;
+}
 
-    .title-img {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-    }
+.nav-link.active-filter {
+  font-weight: bold !important;
+  color: red !important;
+  text-decoration: underline !important;
+}
 
-  .button {
-    padding: 10px 20px;
-    border: 2px solid black;
-    border-radius: 20px;
-    background-color: white;
-    cursor: pointer;
-    font-weight: bold;
-    align-self: flex-start;
-    margin-top: auto;
+    /* MOBILE STYLES */
+ /* MOBILE STYLES */
+.mobile-header {
+  display: none;
+}
+
+@media (max-width: 750px) {
+  .mobile-header {
+    display: flex;
     position: fixed;
-  bottom: 20px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: white;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
   }
 
-  .button:hover {
-    transform: scale(1.08);
-    transition: transform 0.2s ease;
+  .right-column {
+    height: auto;
+    overflow-y: auto;
+    padding-top: 60px; /* Push content below mobile header */
   }
-  
-  .button:active {
-    background-color: black;
-    color: white;
-    border-color: white;
+
+  .grid-wrapper {
+    grid-template-columns: 1fr; /* Only one column */
   }
+
+  .middle-column {
+    display: none; /* Hide navigation on mobile */
+  }
+
+  /* Stack text and images vertically */
+  .details-and-more {
+    flex-direction: column;
+  }
+
+  .more-pictures {
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .more-pictures img {
+    width: 48%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+  }
+}
+
+
+
+.details-and-more {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+
+.project-title {
+  font-size: 2rem;
+  margin: 0 0 5px 0;
+  font-family: 'BentonSans Black', sans-serif;
+}
+
+.desc-grey {
+  color: grey;
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.desc-black {
+  color: black;
+  margin: 0 0 5px 0;
+  font-size: 1.rem;
+}
+
+.left-details {
+  flex: 3.3;   /* Make text column smaller */
+  text-align: left;
+}
+
+.more-pictures {
+  flex: 4;   /* Make pictures column bigger */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.more-pictures img {
+  width: 100%;
+  height: auto;          /* Let height adjust based on width */
+  max-height: 80vh;      /* Max height relative to viewport height */
+  object-fit: cover;
+  aspect-ratio: 3 / 4;   /* Keep consistent ratio */
+  transition: height 0.3s ease;
+}
+
+
+
   </style>
 </head>
 <body>
+  <!-- Mobile Floating Header -->
+  <div class="mobile-header">
+    <a href="/Homepage/Index.html" class="name-link">ALICIA LEE</a>
+  </div>
+
   <div class="grid-wrapper">
-    <div class="left-column">
-      <div class="scroll-text">alicia888lee@gmail.com</div>
+    <!-- LEFT COLUMN -->
+    <div class="middle-column">
+      <div>
+        <div class="name"> 
+          <a href="/Homepage/Index.html" class="name-link">ALICIA LEE</a>  
+        </div>
+
+        <div class="nav-links-container">
+          <a href="/Homepage/Index.html?filter=touch" class="nav-link filter-link" data-filter="touch">TOUCH</a>
+          <a href="/Homepage/Index.html?filter=feel" class="nav-link filter-link" data-filter="feel">FEEL</a>
+          <a href="/Homepage/Index.html?filter=see" class="nav-link filter-link" data-filter="see">SEE</a>
+        </div>
+      </div>
+
+      <div class="face-wrapper">
+        <div class="face">
+          <div class="face-circle"></div>
+          <div class="ear-left"></div>
+          <div class="ear-right"></div>
+          <div class="eyes">
+            <div class="eye"><div class="pupil"></div></div>
+            <div class="eye"><div class="pupil"></div></div>
+          </div>
+          <button class="button">ME</button>
+        </div>
+      </div>
     </div>
 
-    <div class="middle-column">
-      <div class="name">ALICIA LEE</div>
-      <a href="/Homepage/Index.html" class="nav-link">TOUCH</a>
-      <a href="/Homepage/Index.html" class="nav-link">FEEL</a>
-      <a href="/Homepage/Index.html" class="nav-link">SEE</a>
-      <button class="button">ME</button>
+    <!-- RIGHT COLUMN -->
+    <!-- RIGHT COLUMN -->
+<div class="right-column">
+  <img class="title-img" src="Photos/pigeongrill copy 2.jpg" alt="Image Placeholder" />
+  
+  <!-- Two columns container -->
+  <div class="details-and-more">
+    <!-- Left column: Title + description -->
+    <div class="left-details">
+      <div class="project-title">mushi mushi</div>
+      <p class="desc-grey">Stoneware Ceramics</p>
+      <p class="desc-black">mushi mushi is my brainchild, dedicated to creating functional yet playful ceramic dinnerware. Inspired by my time hosting dinner parties, my pieces are made by hand with love.</p>
     </div>
     
-
-    <div class="right-column">
-      <img class="title-img" src="Photos/pigeongrill copy 2.jpg" alt="Image Placeholder" />
-      <div class="project-title">mushi mushi</div>
-      <p style="margin-top: 1000px;">content</p>
+    <!-- Right column: More pictures -->
+    <div class="more-pictures">
+      <img src="Photos/Screenshot 2025-05-15 at 4.15.09 AM.png" alt="Extra image 1" />
+      <img src="Photos/Screenshot 2025-05-15 at 4.15.18 AM.png" alt="Extra image 2" />
     </div>
   </div>
+</div>
+
+  <script>
+   const urlParams = new URLSearchParams(window.location.search);
+  const filter = urlParams.get('filter');
+
+  if (filter) {
+    // Add the filter query param to all homepage links on this page,
+    // so clicking "ALICIA LEE" or others sends user back with filter intact
+    document.querySelectorAll('a[href="/Homepage/Index.html"]').forEach(link => {
+      link.href = `/Homepage/Index.html?filter=${filter}`;
+    });
+
+    // Optionally, highlight the active filter link in nav
+    const activeLink = document.querySelector(`.filter-link[data-filter="${filter}"]`);
+    if (activeLink) {
+      activeLink.classList.add('active-filter');
+    }
+  }
+  </script>
+  
+  
 </body>
 </html>

@@ -37,7 +37,6 @@
       flex-direction: column;
       justify-content: space-between;
       white-space: nowrap;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     }
 
     .name {
@@ -90,37 +89,7 @@
       font-weight: 700;
     }
 
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      min-height: 100vh;
-    }
-
-    .project-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      aspect-ratio: 1 / 1;
-      display: block;
-      transition: transform 0.2s, filter 0.3s;
-    }
-
-    .project-grid img:hover {
-      transform: scale(1.08);
-      border-radius: 15px;
-      z-index: 100;
-    }
-
-    .highlight {
-      filter: brightness(1) !important;
-      z-index: 200 !important;
-    }
-
-    .filtered .project-grid img {
-      filter: brightness(0.4);
-    }
-
+    
     @media (min-width: 1200px) {
       .project-grid {
         grid-template-columns: repeat(4, 1fr);
@@ -291,20 +260,7 @@
       </div>
     </div>
 
-    <div class="project-grid">
-      <a class="touch" href="/mushimushi/mushimushi.html"><img src="photos/pigeongrill copy.jpg" alt="mushi mushi"></a>
-      <a class="touch" href="#"><img src="photos/snake copy.jpg" alt="snake"></a>
-      <a class="touch" href="#"><img src="photos/dinnerwithfriends.jpg" alt="dinner"></a>
-      <a class="touch" href="/mushimushi/mushimushi.html"><img src="photos/lightrender copy.jpg" alt="light"></a>
-      <a class="touch" href="/mushimushi/mushimushi.html"><img src="photos/cig-01.jpg" alt="cig"></a>
-      <a class="touch" href="/mushimushi/mushimushi.html"><img src="photos/dinnerwithfriends.jpg" alt="din3"></a>
-      <a class="feel" href="#"><img src="photos/dinnerwithfriends.jpg" alt="dinner4"></a>
-      <a class="feel" href="#"><img src="photos/IMG_2041 2 1 copy.jpg" alt="dinner5"></a>
-      <a class="see" href="#"><img src="photos/Screenshot 2024-12-29 at 3.39.36 AM copy.jpg" alt="dinner5"></a>
-      <a class="see" href="#"><img src="photos/Screenshot 2024-12-29 at 4.35.42 AM copy.jpg" alt="dinner5"></a>
-      <a class="see" href="#"><img src="photos/Screenshot 2025-04-29 at 11.26.55 AM.jpg" alt="dinner5"></a>
-      <a class="see" href="#"><img src="photos/dinnerwithfriends.jpg" alt="dinner5"></a>
-    </div>
+   
 
   </div>
 
