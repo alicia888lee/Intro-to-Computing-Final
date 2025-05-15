@@ -187,11 +187,6 @@
       color: red;
     }
 
-    .right-column {
-      overflow-y: auto;
-      height: 100vh;
-    }
-
     .title-img {
       width: 100%;
       height: auto;
@@ -283,21 +278,31 @@
   font-size: 2rem;
   margin: 0 0 5px 0;
   font-family: 'BentonSans Black', sans-serif;
+  line-height: 1;
 }
 
 .desc-grey {
   color: grey;
   margin: 0 0 5px 0;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.2;
 }
 
 .desc-black {
   color: black;
   margin: 0 0 5px 0;
   font-size: 1.rem;
+  margin-top: 15px;
 }
 
+.desc-title {
+  color: black;
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 600;
+  margin-top: 30px;
+}
 .left-details {
   flex: 3.3;   /* Make text column smaller */
   text-align: left;
@@ -318,10 +323,58 @@
   aspect-ratio: 3 / 4;   /* Keep consistent ratio */
   transition: height 0.3s ease;
 }
+body {
+    /* Make the body tall enough to scroll */
+    height: 200vh;
+  }
+  .right-column {
+  overflow-y: auto;
+  height: 100vh;
+  position: relative; /* to contain absolute/relative children */
+  padding: 20px; /* optional for breathing room */
+}
 
+.horizontal-scroll-container {
+  position: relative;  /* remove sticky */
+  height: 70vh;
+  width: 100%;        /* take full width of right column */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  display: flex;        /* small gap between slides */
+  margin: 0;
+  padding: 0;
+  scroll-padding-left: 0; /* prevent scroll snap offset */
+  scroll-padding-right: 0;
+  /* optional: hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+}
 
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
 
-  </style>
+.slide {
+  flex: 0 0 auto;
+  width: 80%;         /* smaller than container width to fit nicely */
+  height: 100%;
+  scroll-snap-align: start;
+  user-select: none;
+  pointer-events: none;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: auto;
+  user-select: auto;
+  display: block;
+}
+ </style>
 </head>
 <body>
   <!-- Mobile Floating Header -->
@@ -359,7 +412,6 @@
     </div>
 
     <!-- RIGHT COLUMN -->
-    <!-- RIGHT COLUMN -->
 <div class="right-column">
   <img class="title-img" src="Photos/pigeongrill copy 2.jpg" alt="Image Placeholder" />
   
@@ -370,6 +422,12 @@
       <div class="project-title">mushi mushi</div>
       <p class="desc-grey">Stoneware Ceramics</p>
       <p class="desc-black">mushi mushi is my brainchild, dedicated to creating functional yet playful ceramic dinnerware. Inspired by my time hosting dinner parties, my pieces are made by hand with love.</p>
+   <div class="desc-title"> Collections</div>
+   <p class="desc-black" > Steve, the pigeon grill - Feed him charcoal and warm his belly in exchange for perfect hot dogs.
+    Steve will be showcased and auctioned at the New York Design Festival in May 2025. </p>
+    <p class="desc-black" > Penguin Pals - Vases for every occasion. Every penguin is different and has their own personalities. </p>
+    <p class="desc-black" >Let’s Feast - Unique plates, bowls, cups, and coasters for a fun dining experience. </p>
+  
     </div>
     
     <!-- Right column: More pictures -->
@@ -378,6 +436,12 @@
       <img src="Photos/Screenshot 2025-05-15 at 4.15.18 AM.png" alt="Extra image 2" />
     </div>
   </div>
+  <div class="horizontal-scroll-container" id="carousel">
+    <div class="slide" ><img src="Photos/Screenshot 2025-05-15 at 4.42.36 AM.png" alt="Slide 1"></div>
+    <div class="slide" ><img src="Photos/Screenshot 2025-05-15 at 4.42.43 AM.png" alt="Slide 1"></div>
+    <div class="slide" ><img src="Photos/Screenshot 2025-05-15 at 4.42.48 AM.png" alt="Slide 1"></div>
+  </div>
+</div>
 </div>
 
   <script>
@@ -397,6 +461,23 @@
       activeLink.classList.add('active-filter');
     }
   }
+  const carousel = document.getElementById('carousel');
+const totalSlides = carousel.children.length;
+const vh = window.innerHeight;
+
+window.addEventListener('scroll', () => {
+  const rect = carousel.getBoundingClientRect();
+  const scrollWidth = carousel.scrollWidth - window.innerWidth;
+
+  // Only act when the carousel is in the viewport
+  if (rect.top <= 0 && rect.bottom >= 0) {
+    // Calculate how far user scrolled inside the container area
+    const scrollProgress = Math.min(1, Math.abs(rect.top) / (rect.height));
+
+    // Set horizontal scroll proportional to scroll progress * total scroll width
+    carousel.scrollLeft = scrollProgress * scrollWidth;
+  }
+});
   </script>
   
   
