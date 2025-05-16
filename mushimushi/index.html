@@ -512,22 +512,24 @@ body {
     }
   }
   const carousel = document.getElementById('carousel');
-const totalSlides = carousel.children.length;
-const vh = window.innerHeight;
+const scrollWidth = carousel.scrollWidth - carousel.clientWidth;
 
 window.addEventListener('scroll', () => {
   const rect = carousel.getBoundingClientRect();
-  const scrollWidth = carousel.scrollWidth - window.innerWidth;
+  const viewportHeight = window.innerHeight;
 
-  // Only act when the carousel is in the viewport
-  if (rect.top <= 0 && rect.bottom >= 0) {
-    // Calculate how far user scrolled inside the container area
-    const scrollProgress = Math.min(1, Math.abs(rect.top) / (rect.height));
+  // Only scroll horizontally when carousel is visible
+  if (rect.top < viewportHeight && rect.bottom > 0) {
+    // Calculate progress of vertical scroll through carousel
+    const totalScrollDistance = viewportHeight + rect.height;
+    const scrolled = viewportHeight - rect.top;
+    const progress = Math.min(Math.max(scrolled / totalScrollDistance, 0), 1);
 
-    // Set horizontal scroll proportional to scroll progress * total scroll width
-    carousel.scrollLeft = scrollProgress * scrollWidth;
+    // Set horizontal scroll based on progress
+    carousel.scrollLeft = progress * scrollWidth;
   }
 });
+
   </script>
   
   
