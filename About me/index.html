@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Alicia Lee Portfolio</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap">
   <style>
     * {
       box-sizing: border-box;
@@ -14,7 +13,7 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: 'Roboto', sans-serif;
+  font-family: 'BentonSans Light', sans-serif;
       overflow: hidden;
     }
 
@@ -38,18 +37,19 @@
       border-right: 2px solid black; 
     }
 
-    .name {
+   .name {
       color: black;
-      font-family: 'Roboto', sans-serif;
-      font-weight: 900;
+      font-family: 'BentonSans Black', sans-serif;
       font-size: 1.6rem;
       line-height: 1.2;
+      align-self: flex-start;
       margin: 0 0 20px 0;
     }
 
     .name-link {
       font-size: 2rem;
-      font-weight: 900;
+      font-family: 'BentonSans Black', sans-serif;
+      font-weight: bold;
       text-decoration: none;
       color: black;
     }
@@ -57,24 +57,33 @@
     .name-link:hover {
       color: gray;
     }
-
-    .nav-links-container {
+     .nav-links-container {
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
       gap: 0.3rem;
       margin-top: 0.2rem;
+      margin-bottom: 0;
+      padding-left: 0;
     }
 
     .nav-link {
       text-decoration: none;
       color: black;
       font-size: 0.9rem;
+      transition: color 0.2s;
+      white-space: nowrap;
       font-weight: 600;
       cursor: pointer;
     }
 
     .nav-link:hover {
       color: gray;
+    }
+
+    .nav-link.active-filter {
+      color: red;
+      font-weight: 700;
     }
 
     .face-wrapper {
@@ -195,6 +204,7 @@
       margin: 20px;
       font-weight: 900;
       margin-top: 50px;
+       font-family: 'BentonSans Black', sans-serif;
     }
 
     .nav-link.active-filter {
@@ -279,6 +289,8 @@
       color: black;
       margin: 0 0 5px 0;
       font-size: 1rem;
+      font-family: 'BentonSans Light', sans-serif;
+      
     }
 
     .desc-bold {
@@ -286,6 +298,7 @@
       margin: 0 0 5px 0;
       font-size: 1rem;
       font-weight: 600;
+            font-family: 'BentonSans Light', sans-serif;
     }
 
     .drawing-widget {
@@ -370,7 +383,7 @@
     </div>
 
     <div class="right-column" style="display: flex; flex-direction: column; align-items: center; padding: 40px; gap: 40px;">
-                 <div class="project-title">Bringing your Ideas to Life</div>
+                 <div class="project-title">BRINGING YOUR IDEAS TO LIFE</div>
      
           <div class="drawing-widget">
   <canvas id="drawCanvas" width="300" height="300"></canvas>
