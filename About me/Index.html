@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Alicia Lee Portfolio</title>
   <style>
     * {
@@ -14,15 +14,13 @@
       padding: 0;
       height: 100%;
       font-family: 'BentonSans Light', sans-serif;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
     .grid-wrapper {
       display: grid;
       grid-template-columns: 260px 1fr;
       height: 100vh;
-      overflow-x: auto;
-      position: relative;
     }
 
     .middle-column {
@@ -36,7 +34,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      white-space: nowrap;
+      border-right: 2px solid black; 
     }
 
     .name {
@@ -44,14 +42,12 @@
       font-family: 'BentonSans Black', sans-serif;
       font-size: 1.6rem;
       line-height: 1.2;
-      align-self: flex-start;
       margin: 0 0 20px 0;
     }
 
     .name-link {
       font-size: 2rem;
       font-family: 'BentonSans Black', sans-serif;
-      font-weight: bold;
       text-decoration: none;
       color: black;
     }
@@ -63,58 +59,20 @@
     .nav-links-container {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
       gap: 0.3rem;
       margin-top: 0.2rem;
-      margin-bottom: 0;
-      padding-left: 0;
     }
 
     .nav-link {
       text-decoration: none;
       color: black;
       font-size: 0.9rem;
-      transition: color 0.2s;
-      white-space: nowrap;
       font-weight: 600;
       cursor: pointer;
     }
 
     .nav-link:hover {
       color: gray;
-    }
-
-    .nav-link.active-filter {
-      color: red;
-      font-weight: 700;
-    }
-
-    
-    @media (min-width: 1200px) {
-      .project-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    @media (max-width: 750px) {
-      .grid-wrapper {
-        grid-template-columns: 260px 1fr;
-      }
-      .middle-column {
-        position: sticky;
-        top: 0;
-        width: 260px;
-        height: 100vh;
-        padding: 40px 20px 20px 20px;
-        margin-left: 0;
-        white-space: nowrap;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-      .project-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     .face-wrapper {
@@ -218,33 +176,265 @@
       font-size: 1rem;
       line-height: 1;
       color: white;
+      box-shadow: inset 0 5px 10px -4px rgba(255, 255, 255, 0.15);
       transition: transform 0.3s ease, color 0.3s ease;
       text-align: center;
       z-index: 10;
+      text-decoration: none;
     }
 
     .button:hover {
       transform: scale(1.08);
       color: red;
     }
-  </style>
+
+    .title-img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-title {
+      font-size: 2rem;
+      margin: 20px;
+      font-family: 'BentonSans Black';
+    }
+    .nav-link.active-filter {
+  font-weight: bold;
+  color: red;
+  text-decoration: underline;
+}
+
+.nav-link.active-filter {
+  font-weight: bold !important;
+  color: red !important;
+  text-decoration: underline !important;
+}
+
+    /* MOBILE STYLES */
+ /* MOBILE STYLES */
+.mobile-header {
+  display: none;
+}
+
+@media (max-width: 750px) {
+  .mobile-header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: white;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
+  }
+
+  .right-column {
+    height: auto;
+    overflow-y: auto;
+    padding-top: 60px; /* Push content below mobile header */
+  }
+
+  .grid-wrapper {
+    grid-template-columns: 1fr; /* Only one column */
+  }
+
+  .middle-column {
+    display: none; /* Hide navigation on mobile */
+  }
+
+  /* Stack text and images vertically */
+  .details-and-more {
+    flex-direction: column;
+  }
+
+  .more-pictures {
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .more-pictures img {
+    width: 48%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+  }
+}
+
+
+
+.details-and-more {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+
+.project-title {
+  font-size: 2rem;
+  margin: 0 0 5px 0;
+  font-family: 'BentonSans Black', sans-serif;
+  line-height: 1;
+}
+
+.desc-grey {
+  color: grey;
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.desc-black {
+  color: black;
+  margin: 0 0 5px 0;
+  font-size: 1.rem;
+  margin-top: 15px;
+}
+
+.desc-title {
+  color: black;
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.left-details {
+  flex: 3.3;   /* Make text column smaller */
+  text-align: left;
+}
+
+.more-pictures {
+  flex: 4;   /* Make pictures column bigger */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.more-pictures img {
+  width: 100%;
+  height: auto;          /* Let height adjust based on width */
+  max-height: 80vh;      /* Max height relative to viewport height */
+  object-fit: cover;
+  aspect-ratio: 3 / 4;   /* Keep consistent ratio */
+  transition: height 0.3s ease;
+}
+body {
+    /* Make the body tall enough to scroll */
+    height: 200vh;
+  }
+  .right-column {
+  overflow-y: auto;
+  height: 100vh;
+  position: relative; /* to contain absolute/relative children */
+  padding: 20px; /* optional for breathing room */
+}
+
+.horizontal-scroll-container {
+  position: relative;  /* remove sticky */
+  height: 70vh;
+  width: 100%;        /* take full width of right column */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  display: flex;        /* small gap between slides */
+  margin: 0;
+  padding: 0;
+  scroll-padding-left: 0; /* prevent scroll snap offset */
+  scroll-padding-right: 0;
+  /* optional: hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.slide {
+  flex: 0 0 auto;
+  width: 80%;         /* smaller than container width to fit nicely */
+  height: 100%;
+  scroll-snap-align: start;
+  user-select: none;
+  pointer-events: none;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: auto;
+  user-select: auto;
+  display: block;
+}
+
+.you-may-also-like {
+      margin-top: 40px;
+    }
+
+    .you-may-also-like h2 {
+      font-family: 'BentonSans Black', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .you-may-also-like div {
+      display: flex;
+    }
+    .you-may-also-like .desc-title {
+  border-top: 2px solid black;
+  padding-top: 10px;
+  margin-top: 40px; /* give some space above */
+}
+
+.you-may-also-like img {
+  width: 33%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.03s ease;
+  cursor: pointer;
+  aspect-ratio: 3 / 2; /* Changed from 3/4 to 3/2 for shorter height */
+  max-height: 200px;   /* Optional max height to keep consistent smaller height */
+}
+
+    .you-may-also-like img:hover {
+      transform: scale(1.07);
+      border-radius: 8px;
+    }
+
+
+
+ </style>
 </head>
 <body>
-  <div class="grid-wrapper">
+  <!-- Mobile Floating Header -->
+  <div class="mobile-header">
+    <a href="/index.html" class="name-link">ALICIA LEE</a>
+  </div>
 
+  <div class="grid-wrapper">
+    <!-- LEFT COLUMN -->
     <div class="middle-column">
       <div>
-        div class="name"> 
-        <a href="../index.html" class="name-link">ALICIA LEE</a>  
-      </div>
+        <div class="name"> 
+          <a href="../index.html" class="name-link">ALICIA LEE</a>  
+        </div>
 
-      <div class="nav-links-container">
-        <a href="../index.html" class="nav-link filter-link" data-filter="touch">TOUCH</a>
-        <a href="../index.html" class="nav-link filter-link" data-filter="feel">FEEL</a>
-        <a href="../index.html" class="nav-link filter-link" data-filter="see">SEE</a>
+        <div class="nav-links-container">
+          <a href="../index.html" class="nav-link filter-link" data-filter="touch">TOUCH</a>
+          <a href="../index.html" class="nav-link filter-link" data-filter="feel">FEEL</a>
+          <a href="../index.html" class="nav-link filter-link" data-filter="see">SEE</a>
+        </div>
       </div>
-    </div>
-
 
       <div class="face-wrapper">
         <div class="face">
@@ -255,47 +445,17 @@
             <div class="eye"><div class="pupil"></div></div>
             <div class="eye"><div class="pupil"></div></div>
           </div>
-          <a button class="button" href="About me/index.html">ME</button></a>        </div>
-        </div>
+          <a button class="button" href="../About me/index.html">ME</button></a>        </div>
       </div>
     </div>
 
-   
-
+    <!-- RIGHT COLUMN -->
+<div class="right-column">
+  <img class="title-img" src="Photos/pigeongrill copy 2.jpg" alt="Image Placeholder" />
+  
   </div>
 
-  <script>
-    document.querySelectorAll('.filter-link').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const filter = e.target.getAttribute('data-filter');
-        const grid = document.querySelector('.project-grid');
-
-        if (e.target.classList.contains('active-filter')) {
-          e.target.classList.remove('active-filter');
-          grid.classList.remove('filtered');
-          document.querySelectorAll('.project-grid a img').forEach(img => {
-            img.classList.remove('highlight');
-            img.style.filter = 'brightness(1)';
-          });
-        } else {
-          document.querySelectorAll('.filter-link').forEach(link => link.classList.remove('active-filter'));
-          e.target.classList.add('active-filter');
-          grid.classList.add('filtered');
-
-          document.querySelectorAll('.project-grid a').forEach(link => {
-            const img = link.querySelector('img');
-            if (link.classList.contains(filter)) {
-              img.classList.add('highlight');
-              img.style.filter = 'brightness(1)';
-            } else {
-              img.classList.remove('highlight');
-              img.style.filter = 'brightness(0.4)';
-            }
-          });
-        }
-      });
-    });
-  </script>
+  
+  
 </body>
 </html>
