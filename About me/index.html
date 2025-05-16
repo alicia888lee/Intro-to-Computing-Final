@@ -333,6 +333,36 @@
     .nav-right {
       right: 0;
     }
+
+    .desc-grey {
+  color: grey;
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.desc-black {
+  color: black;
+  margin: 0 0 5px 0;
+  font-size: 1.rem;
+}
+
+.desc-bold {
+  color: black;
+  margin: 0 0 5px 0;
+  font-size: 1.rem;
+  font-weight: 600;
+}
+
+.desc-title {
+  color: black;
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
   </style>
 </head>
 <body>
@@ -367,6 +397,7 @@
     </div>
 
     <div class="right-column" style="display: flex; flex-direction: column; align-items: center; padding: 40px; gap: 40px;">
+                  <div class="project-title">Put me Together</div>
       <div class="carousel-container">
         <button class="nav-button nav-left" onclick="scrollCarousel('head', -1)">←</button>
         <div class="carousel-wrapper">
@@ -404,8 +435,23 @@
           </div>
         </div>
         <button class="nav-button nav-right" onclick="scrollCarousel('legs', 1)">→</button>
-      </div>
-    </div>
+</div>
+<div style="text-align: center; border-bottom: 2px solid black; padding-bottom: 20px; width: 100%;" class="desc-black">
+  like a mad lib
+</div>
+<div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; max-width: 1000px; margin-top: 20px; gap: 40px; align-items: flex-start;">
+  <div style="flex: 1.5; font-weight: 900; font-size: 1.2rem;">
+    Hey there!
+  </div>
+  <div style="flex: 3;" class="desc-black">
+    Curious by nature, expressive by design, I'm a proactive problem solver who strives to craft stories and solutions through a human-centric lens. In my free time, I enjoy spending time at my pottery studio, hosting dinner parties, and binging “Community.”
+  <div style="flex: 3; margin-top: 20px;" class="desc-bold"> Rhode Island School of Design</div>
+        <p class="desc-black">Masters in Industrial Design (Exp. 2026)</p>
+
+  <div style="flex: 3; margin-top: 20px;" class="desc-bold"> Northwestern University </div>
+        <p class="desc-black">B.S. Communication Studies, Human-Centered Design</p>
+  </div>
+</div>
   </div>
 
   <script>
