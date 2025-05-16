@@ -440,181 +440,179 @@ Let's Chat </div>
 
 
   <script>
-   const canvas = document.getElementById('drawCanvas');
-  const ctx = canvas.getContext('2d');
-  const colorPicker = document.getElementById('colorPicker');
-  const clearBtn = document.getElementById('clearBtn');
+  const canvas = document.getElementById('drawCanvas');
+const ctx = canvas.getContext('2d');
+const colorPicker = document.getElementById('colorPicker');
+const clearBtn = document.getElementById('clearBtn');
 
-  let drawing = false;
-  let currentColor = colorPicker.value;
+let drawing = false;
+let currentColor = colorPicker.value;
+const lines = [];
+let currentLine = null;
+let animationTime = 0;
 
-  // Store lines as arrays of points with position offset and velocity
-  const lines = [];
-  let currentLine = null;
+// Resize canvas to match displayed size for crispness and responsiveness
+function resizeCanvas() {
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * window.devicePixelRatio;
+  canvas.height = rect.height * window.devicePixelRatio;
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  redrawAllLines();
+}
 
-  // To move lines around, each line has an offset position and velocity vector
-  // Points in each line are relative to (0,0), line will be drawn at (offsetX, offsetY)
+function redrawAllLines() {
+  clearCanvas();
+  lines.forEach(drawLineWithOscillation);
+}
 
-  function getCanvasCoordinates(e) {
-    const rect = canvas.getBoundingClientRect();
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+// Helper: get coordinates relative to canvas, accounting for scale
+function getCanvasCoordinates(e) {
+  const rect = canvas.getBoundingClientRect();
+  const clientX = e.clientX;
+  const clientY = e.clientY;
 
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
+  const scaleX = canvas.width / rect.width;
+  const scaleY = canvas.height / rect.height;
 
-    return {
-      x: (clientX - rect.left) * scaleX,
-      y: (clientY - rect.top) * scaleY
-    };
+  return {
+    x: (clientX - rect.left) * (scaleX / window.devicePixelRatio),
+    y: (clientY - rect.top) * (scaleY / window.devicePixelRatio)
+  };
+}
+
+function startDraw(e) {
+  e.preventDefault();
+  drawing = true;
+  const pos = getCanvasCoordinates(e);
+
+  currentLine = {
+    points: [{ x: pos.x, y: pos.y }],
+    color: currentColor,
+    offsetX: pos.x,
+    offsetY: pos.y,
+    oscillationAmplitudeX: 2 + Math.random() * 2,
+    oscillationAmplitudeY: 2 + Math.random() * 2,
+    oscillationFrequencyX: 0.02 + Math.random() * 0.03,
+    oscillationFrequencyY: 0.02 + Math.random() * 0.03,
+    oscillationPhaseX: Math.random() * Math.PI * 2,
+    oscillationPhaseY: Math.random() * Math.PI * 2,
+  };
+}
+
+function draw(e) {
+  if (!drawing) return;
+  e.preventDefault();
+  const pos = getCanvasCoordinates(e);
+  const lastPoint = currentLine.points[currentLine.points.length - 1];
+  currentLine.points.push({ x: pos.x, y: pos.y });
+
+  ctx.strokeStyle = currentLine.color;
+  ctx.lineWidth = 4;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+
+  ctx.beginPath();
+  ctx.moveTo(lastPoint.x, lastPoint.y);
+  ctx.lineTo(pos.x, pos.y);
+  ctx.stroke();
+}
+
+function endDraw(e) {
+  if (!drawing) return;
+  e.preventDefault();
+  drawing = false;
+
+  if (currentLine && currentLine.points.length > 1) {
+    const firstPoint = currentLine.points[0];
+    currentLine.points = currentLine.points.map(p => ({
+      x: p.x - firstPoint.x,
+      y: p.y - firstPoint.y
+    }));
+    currentLine.offsetX = firstPoint.x;
+    currentLine.offsetY = firstPoint.y;
+
+    lines.push(currentLine);
+  }
+  currentLine = null;
+}
+
+function clearCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawLineWithOscillation(line) {
+  ctx.strokeStyle = line.color;
+  ctx.lineWidth = 4;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+
+  ctx.beginPath();
+
+  for (let i = 0; i < line.points.length - 1; i++) {
+    const p1 = line.points[i];
+    const p2 = line.points[i + 1];
+
+    // Calculate oscillations for squiggle effect
+    const oscillationX1 = line.oscillationAmplitudeX * Math.sin(animationTime * line.oscillationFrequencyX + line.oscillationPhaseX + i);
+    const oscillationY1 = line.oscillationAmplitudeY * Math.cos(animationTime * line.oscillationFrequencyY + line.oscillationPhaseY + i);
+
+    const oscillationX2 = line.oscillationAmplitudeX * Math.sin(animationTime * line.oscillationFrequencyX + line.oscillationPhaseX + i + 1);
+    const oscillationY2 = line.oscillationAmplitudeY * Math.cos(animationTime * line.oscillationFrequencyY + line.oscillationPhaseY + i + 1);
+
+    ctx.moveTo(line.offsetX + p1.x + oscillationX1, line.offsetY + p1.y + oscillationY1);
+    ctx.lineTo(line.offsetX + p2.x + oscillationX2, line.offsetY + p2.y + oscillationY2);
   }
 
-  function startDraw(e) {
-    drawing = true;
-    const pos = getCanvasCoordinates(e);
+  ctx.stroke();
+}
 
-    // Start a new line
-    currentLine = {
-      points: [{x: pos.x, y: pos.y}],
-      color: currentColor,
-      offsetX: 0,
-      offsetY: 0,
-      velocityX: (Math.random() * 2 - 1) * 0.5, // random speed -0.5 to 0.5 px/frame
-      velocityY: (Math.random() * 2 - 1) * 0.5,
-    };
-  }
+function animate() {
+  animationTime += 1;
+  clearCanvas();
 
-  function draw(e) {
-    if (!drawing) return;
-    const pos = getCanvasCoordinates(e);
+  lines.forEach(drawLineWithOscillation);
 
-    // Add point relative to first point to keep line shape intact on movement
-    const lastPoint = currentLine.points[currentLine.points.length - 1];
-    currentLine.points.push({x: pos.x, y: pos.y});
-
-    // Draw immediate line on canvas as user draws
+  if (currentLine) {
+    // Draw the currently drawing line without oscillation for immediacy
     ctx.strokeStyle = currentLine.color;
     ctx.lineWidth = 4;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
 
     ctx.beginPath();
-    ctx.moveTo(lastPoint.x, lastPoint.y);
-    ctx.lineTo(pos.x, pos.y);
+    for (let i = 0; i < currentLine.points.length - 1; i++) {
+      const p1 = currentLine.points[i];
+      const p2 = currentLine.points[i + 1];
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(p2.x, p2.y);
+    }
     ctx.stroke();
   }
 
-  function endDraw() {
-    if (!drawing) return;
-    drawing = false;
+  requestAnimationFrame(animate);
+}
 
-    if (currentLine && currentLine.points.length > 1) {
-      // Normalize points relative to first point so offset can be applied
-      const firstPoint = currentLine.points[0];
-      currentLine.points = currentLine.points.map(p => ({
-        x: p.x - firstPoint.x,
-        y: p.y - firstPoint.y
-      }));
-      // Set offset to first point position
-      currentLine.offsetX = firstPoint.x;
-      currentLine.offsetY = firstPoint.y;
+colorPicker.addEventListener('input', (e) => {
+  currentColor = e.target.value;
+});
 
-      lines.push(currentLine);
-    }
-    currentLine = null;
-  }
+clearBtn.addEventListener('click', () => {
+  lines.length = 0;
+  clearCanvas();
+});
 
-  function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
+// Use pointer events for better device support
+canvas.addEventListener('pointerdown', startDraw);
+canvas.addEventListener('pointermove', draw);
+canvas.addEventListener('pointerup', endDraw);
+canvas.addEventListener('pointercancel', endDraw);
+canvas.addEventListener('pointerout', endDraw);
 
-  function animate() {
-    clearCanvas();
+window.addEventListener('resize', resizeCanvas);
 
-    // Update position of each line by its velocity and bounce on edges
-    lines.forEach(line => {
-      line.offsetX += line.velocityX;
-      line.offsetY += line.velocityY;
-
-      // Bounce off edges (considering bounding box of line)
-      const bounds = getLineBounds(line.points);
-      if (line.offsetX + bounds.minX < 0 || line.offsetX + bounds.maxX > canvas.width) {
-        line.velocityX *= -1;
-        line.offsetX += line.velocityX; // push it back in bounds
-      }
-      if (line.offsetY + bounds.minY < 0 || line.offsetY + bounds.maxY > canvas.height) {
-        line.velocityY *= -1;
-        line.offsetY += line.velocityY;
-      }
-    });
-
-    // Draw all lines at their current offsets
-    lines.forEach(line => {
-      ctx.strokeStyle = line.color;
-      ctx.lineWidth = 4;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-
-      ctx.beginPath();
-      const points = line.points;
-      ctx.moveTo(points[0].x + line.offsetX, points[0].y + line.offsetY);
-      for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(points[i].x + line.offsetX, points[i].y + line.offsetY);
-      }
-      ctx.stroke();
-    });
-
-    // Also draw the line currently being drawn (not yet stored)
-    if (drawing && currentLine) {
-      ctx.strokeStyle = currentLine.color;
-      ctx.lineWidth = 4;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-
-      const pts = currentLine.points;
-      ctx.beginPath();
-      ctx.moveTo(pts[0].x, pts[0].y);
-      for (let i = 1; i < pts.length; i++) {
-        ctx.lineTo(pts[i].x, pts[i].y);
-      }
-      ctx.stroke();
-    }
-
-    requestAnimationFrame(animate);
-  }
-
-  function getLineBounds(points) {
-    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-    points.forEach(p => {
-      if (p.x < minX) minX = p.x;
-      if (p.y < minY) minY = p.y;
-      if (p.x > maxX) maxX = p.x;
-      if (p.y > maxY) maxY = p.y;
-    });
-    return {minX, minY, maxX, maxY};
-  }
-
-  // Event listeners
-  canvas.addEventListener('mousedown', startDraw);
-  canvas.addEventListener('touchstart', e => { e.preventDefault(); startDraw(e); }, { passive: false });
-
-  canvas.addEventListener('mousemove', draw);
-  canvas.addEventListener('touchmove', e => { e.preventDefault(); draw(e); }, { passive: false });
-
-  canvas.addEventListener('mouseup', endDraw);
-  canvas.addEventListener('mouseleave', endDraw);
-  canvas.addEventListener('touchend', e => { e.preventDefault(); endDraw(); }, { passive: false });
-
-  colorPicker.addEventListener('change', e => {
-    currentColor = e.target.value;
-  });
-
-  clearBtn.addEventListener('click', () => {
-    lines.length = 0;
-    clearCanvas();
-  });
-
-  animate();
+// Initial resize and start animation
+resizeCanvas();
+animate();
 
   </script>
 </body>
