@@ -137,7 +137,7 @@
     }
 
     .ear-right {
-      left: calc(50% + 65px);
+      left: calc(50% + 62px);
     }
 
     .eyes {
@@ -343,12 +343,48 @@
       background: white;
       color: black;
     }
+   
+    #clearBtn:hover {
+  background-color: black;
+  color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-    .drawing-widget input[type="color"] {
-      width: 40px;
-      height: 40px;
-      padding: 0;
-    }
+
+.drawing-widget input[type="color"]:hover {
+  transform: scale(1.2);
+}
+
+/* Enlarge "Start Over" button on hover */
+#clearBtn:hover {
+  background-color: black;
+  color: white;
+  transform: scale(1.1);
+}
+
+  .drawing-widget input[type="color"] {
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background: transparent;
+  transition: transform 0.2s ease;
+}
+
+.drawing-widget input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: 50%;
+}
+
+.drawing-widget input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+}
+
   </style>
 </head>
 <body>
@@ -363,9 +399,9 @@
           <a href="../index.html" class="name-link">ALICIA LEE</a>  
         </div>
         <div class="nav-links-container">
-          <a href="../index.html" class="nav-link filter-link" data-filter="touch">TOUCH</a>
-          <a href="../index.html" class="nav-link filter-link" data-filter="feel">FEEL</a>
-          <a href="../index.html" class="nav-link filter-link" data-filter="see">SEE</a>
+<a href="../index.html?filter=touch" class="nav-link filter-link">TOUCH</a>
+<a href="../index.html?filter=feel" class="nav-link filter-link">FEEL</a>
+<a href="../index.html?filter=see" class="nav-link filter-link">SEE</a>
         </div>
       </div>
       <div class="face-wrapper">
@@ -384,14 +420,16 @@
 
     <div class="right-column" style="display: flex; flex-direction: column; align-items: center; padding: 40px; gap: 40px;">
                  <div class="project-title">BRINGING YOUR IDEAS TO LIFE</div>
+
      
-          <div class="drawing-widget">
+ <div class="drawing-widget">
+  <div class="desc-black" style="padding-left: 8px; padding-bottom: 10px; padding-top: 10px;text-align: center;">Draw Here!</div>
   <canvas id="drawCanvas" width="300" height="300"></canvas>
   <div class="controls">
     <input type="color" id="colorPicker" value="#000000">
-    <button id="clearBtn">Clear</button>
+    <button id="clearBtn">Start Over</button>
   </div>
-</div>        
+</div>      
 
 <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; max-width: 1000px; margin-top: 20px; gap: 40px; align-items: flex-start;">
   <div style="flex: 1.5; font-weight: 900; font-size: 1.2rem;">
@@ -626,6 +664,8 @@ window.addEventListener('resize', resizeCanvas);
 // Initial resize and start animation
 resizeCanvas();
 animate();
+
+
 
   </script>
 </body>

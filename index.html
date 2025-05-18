@@ -268,13 +268,13 @@
     <div class="middle-column">
       <div>
         <div class="name"> 
-          <a href="./index.html" class="name-link">ALICIA LEE</a>  
+          <a href="index.html" class="name-link">ALICIA LEE</a>  
         </div>
 
         <div class="nav-links-container">
-          <a href="#" class="nav-link filter-link" data-filter="touch">TOUCH</a>
-          <a href="#" class="nav-link filter-link" data-filter="feel">FEEL</a>
-          <a href="#" class="nav-link filter-link" data-filter="see">SEE</a>
+<a href="?filter=touch" class="nav-link filter-link" data-filter="touch">TOUCH</a>
+<a href="?filter=feel" class="nav-link filter-link" data-filter="feel">FEEL</a>
+<a href="?filter=see" class="nav-link filter-link" data-filter="see">SEE</a>
         </div>
       </div>
 
@@ -311,37 +311,62 @@
   </div>
 
   <script>
+   function applyFilterFromParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const filter = urlParams.get('filter');
+
+    const grid = document.querySelector('.project-grid');
+    const links = document.querySelectorAll('.filter-link');
+
+    if (!filter) {
+      links.forEach(link => link.classList.remove('active-filter'));
+      grid.classList.remove('filtered');
+      document.querySelectorAll('.project-grid a img').forEach(img => {
+        img.classList.remove('highlight');
+        img.style.filter = 'brightness(1)';
+      });
+      return;
+    }
+
+    links.forEach(link => {
+      if (link.dataset.filter === filter) {
+        link.classList.add('active-filter');
+      } else {
+        link.classList.remove('active-filter');
+      }
+    });
+
+    grid.classList.add('filtered');
+    document.querySelectorAll('.project-grid a').forEach(link => {
+      const img = link.querySelector('img');
+      if (link.classList.contains(filter)) {
+        img.classList.add('highlight');
+        img.style.filter = 'brightness(1)';
+      } else {
+        img.classList.remove('highlight');
+        img.style.filter = 'brightness(0.4)';
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    applyFilterFromParams();
+
     document.querySelectorAll('.filter-link').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const filter = e.target.getAttribute('data-filter');
-        const grid = document.querySelector('.project-grid');
-
-        if (e.target.classList.contains('active-filter')) {
-          e.target.classList.remove('active-filter');
-          grid.classList.remove('filtered');
-          document.querySelectorAll('.project-grid a img').forEach(img => {
-            img.classList.remove('highlight');
-            img.style.filter = 'brightness(1)';
-          });
+        const newUrl = new URL(window.location.href);
+        if (link.classList.contains('active-filter')) {
+          newUrl.searchParams.delete('filter');
         } else {
-          document.querySelectorAll('.filter-link').forEach(link => link.classList.remove('active-filter'));
-          e.target.classList.add('active-filter');
-          grid.classList.add('filtered');
-
-          document.querySelectorAll('.project-grid a').forEach(link => {
-            const img = link.querySelector('img');
-            if (link.classList.contains(filter)) {
-              img.classList.add('highlight');
-              img.style.filter = 'brightness(1)';
-            } else {
-              img.classList.remove('highlight');
-              img.style.filter = 'brightness(0.4)';
-            }
-          });
+          newUrl.searchParams.set('filter', filter);
         }
+        window.history.pushState({}, '', newUrl);
+        applyFilterFromParams();
       });
     });
+  });
   </script>
 </body>
 </html>  
