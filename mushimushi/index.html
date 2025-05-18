@@ -421,6 +421,56 @@ body {
       border-radius: 8px;
     }
 
+.carousel-wrapper {
+  position: relative; /* relative container for absolute buttons */
+  width: 100%;
+  height: 70vh; /* same height as your carousel container */
+}
+
+.horizontal-scroll-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  scrollbar-width: none; /* Firefox */
+  position: relative; /* keep if you want */
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+}
+
+
+#carousel-prev {
+  left: 10px;
+}
+
+#carousel-next {
+  right: 10px;
+}
+
+.carousel-button:hover {
+  background-color: #444;
+}
+
 
 
  </style>
@@ -486,11 +536,16 @@ body {
   </div>
 
   <div class="desc-title"> Behind the Scenes</div>
+<div class="carousel-wrapper">
   <div class="horizontal-scroll-container" id="carousel">
-    <div class="slide" ><img src="Photos/Screenshot 2025-05-15 at 4.42.36 AM.png" alt="Slide 1"></div>
-    <div class="slide" ><img src="Photos/Screenshot 2025-05-15 at 4.42.43 AM.png" alt="Slide 1"></div>
-    <div class="slide" ><img src="Photos/Screenshot 2025-05-15 at 4.42.48 AM.png" alt="Slide 1"></div>
+    <div class="slide"><img src="Photos/Screenshot 2025-05-15 at 4.42.36 AM.png" alt="Slide 1"></div>
+    <div class="slide"><img src="Photos/Screenshot 2025-05-15 at 4.42.43 AM.png" alt="Slide 2"></div>
+    <div class="slide"><img src="Photos/Screenshot 2025-05-15 at 4.42.48 AM.png" alt="Slide 3"></div>
   </div>
+  <button id="carousel-prev" class="carousel-button" aria-label="Previous slide">&#8249;</button>
+  <button id="carousel-next" class="carousel-button" aria-label="Next slide">&#8250;</button>
+</div>
+
 
   <div class="you-may-also-like" aria-label="You may also like suggestions">
     <div class="desc-title"> You May Also Like</div>
@@ -505,38 +560,20 @@ body {
 
 
   <script>
-   const urlParams = new URLSearchParams(window.location.search);
-  const filter = urlParams.get('filter');
-
-  if (filter) {
-    // Add the filter query param to all homepage links on this page,
-    // so clicking "ALICIA LEE" or others sends user back with filter intact
-    document.querySelectorAll('a[href="/Homepage/Index.html"]').forEach(link => {
-      link.href = `/Homepage/Index.html?filter=${filter}`;
-    });
-
-    // Optionally, highlight the active filter link in nav
-    const activeLink = document.querySelector(`.filter-link[data-filter="${filter}"]`);
-    if (activeLink) {
-      activeLink.classList.add('active-filter');
-    }
-  }
+  
   const carousel = document.getElementById('carousel');
-const totalSlides = carousel.children.length;
-const vh = window.innerHeight;
+const slides = carousel.querySelectorAll('.slide'); // Only slides, not buttons
+const prevButton = document.getElementById('carousel-prev');
+const nextButton = document.getElementById('carousel-next');
 
-window.addEventListener('scroll', () => {
-  const rect = carousel.getBoundingClientRect();
-  const scrollWidth = carousel.scrollWidth - window.innerWidth;
+const slideWidth = slides[0].offsetWidth + 20; // Slide width + gap (if any)
 
-  // Only act when the carousel is in the viewport
-  if (rect.top <= 0 && rect.bottom >= 0) {
-    // Calculate how far user scrolled inside the container area
-    const scrollProgress = Math.min(1, Math.abs(rect.top) / (rect.height));
+prevButton.addEventListener('click', () => {
+  carousel.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+});
 
-    // Set horizontal scroll proportional to scroll progress * total scroll width
-    carousel.scrollLeft = scrollProgress * scrollWidth;
-  }
+nextButton.addEventListener('click', () => {
+  carousel.scrollBy({ left: slideWidth, behavior: 'smooth' });
 });
 
   </script>

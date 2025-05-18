@@ -293,6 +293,14 @@
       
     }
 
+        .desc-grey {
+      color: lightgray;
+      margin: 0 0 5px 0;
+      font-size: 1rem;
+      font-family: 'BentonSans Light', sans-serif;
+      
+    }
+
     .desc-bold {
       color: black;
       margin: 0 0 5px 0;
@@ -384,6 +392,18 @@
   border: none;
   border-radius: 50%;
 }
+#saveBtn:hover {
+  background-color: black;
+  color: white;
+  transform: scale(1.1);
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.canvas-container {
+  position: relative;
+  width: 100%;
+}
 
   </style>
 </head>
@@ -413,7 +433,7 @@
             <div class="eye"><div class="pupil"></div></div>
             <div class="eye"><div class="pupil"></div></div>
           </div>
-          <a class="button" href="../About me/index.html">ME</a>
+          <a class="button" href="../About me">ME</a>
         </div>
       </div>
     </div>
@@ -423,13 +443,20 @@
 
      
  <div class="drawing-widget">
-  <div class="desc-black" style="padding-left: 8px; padding-bottom: 10px; padding-top: 10px;text-align: center;">Draw Here!</div>
-  <canvas id="drawCanvas" width="300" height="300"></canvas>
+  <div class="draw-header" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 8px;">
+  <div class="desc-grey">Draw Here!</div>
+  <button id="saveBtn">Save Drawing</button>
+</div>
+
+  <div class="canvas-container">
+    <canvas id="drawCanvas" width="300" height="300"></canvas>
+  </div>
+
   <div class="controls">
     <input type="color" id="colorPicker" value="#000000">
     <button id="clearBtn">Start Over</button>
   </div>
-</div>      
+</div>
 
 <div style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; max-width: 1000px; margin-top: 20px; gap: 40px; align-items: flex-start;">
   <div style="flex: 1.5; font-weight: 900; font-size: 1.2rem;">
@@ -665,7 +692,24 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 animate();
 
+const saveBtn = document.getElementById('saveBtn');
 
+saveBtn.addEventListener('click', () => {
+  // Convert canvas content to a PNG data URL
+  const dataURL = canvas.toDataURL('image/png');
+
+  // Create a temporary link element
+  const link = document.createElement('a');
+  link.href = dataURL;
+  link.download = 'my_drawing.png';  // Filename for the saved image
+  document.body.appendChild(link);
+
+  // Trigger the download
+  link.click();
+
+  // Remove the temporary link
+  document.body.removeChild(link);
+});
 
   </script>
 </body>
