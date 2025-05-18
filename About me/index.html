@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Alicia Lee Portfolio</title>
+
+
+<link rel="icon" href="../Photos/apple-touch-icon.png" type="image/x-icon" />
+
   <style>
     * {
       box-sizing: border-box;
@@ -16,7 +20,12 @@
   font-family: 'BentonSans Light', sans-serif;
       overflow: hidden;
     }
-
+    body {
+  cursor: url('../Photos/favicon-32x32.png'), auto;
+}
+body, a, a:hover, a:active, * {
+  cursor: url('../Photos/favicon-32x32.png'), auto;
+}
     .grid-wrapper {
       display: grid;
       grid-template-columns: 260px 1fr;
@@ -37,7 +46,7 @@
       border-right: 2px solid black; 
     }
 
-   .name {
+      .name {
       color: black;
       font-family: 'BentonSans Black', sans-serif;
       font-size: 1.6rem;
@@ -53,7 +62,6 @@
       text-decoration: none;
       color: black;
     }
-
     .name-link:hover {
       color: gray;
     }
