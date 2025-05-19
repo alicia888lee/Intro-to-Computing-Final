@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alicia Lee Portfolio</title>
+
+<link rel="icon" href="../Photos/apple-touch-icon.png" type="image/x-icon" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'BentonSans Light', sans-serif;
+      overflow: hidden;
+    }
+    body {
+  cursor: url('../Photos/favicon-32x32.png'), auto;
+}
+body, a, a:hover, a:active, * {
+  cursor: url('../Photos/favicon-32x32.png'), auto;
+}
+    .grid-wrapper {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      height: 100vh;
+    }
+
+    .middle-column {
+      position: sticky;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      background: white;
+      z-index: 100;
+      padding: 40px 20px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 2px solid black; 
+    }
+    .name {
+      color: black;
+      font-family: 'BentonSans Black', sans-serif;
+      font-size: 1.6rem;
+      line-height: 1.2;
+      align-self: flex-start;
+      margin: 0 0 20px 0;
+    }
+
+    .name-link {
+      font-size: 2rem;
+      font-family: 'BentonSans Black', sans-serif;
+      font-weight: bold;
+      text-decoration: none;
+      color: black;
+    }
+
+    .name-link:hover {
+      color: gray;
+    }
+
+    .nav-links-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-top: 0.2rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: black;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .nav-link:hover {
+      color: gray;
+    }
+
+    .face-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding-bottom: 20px;
+      position: relative;
+    }
+
+    .face {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .face-circle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 180px;
+      border: 3px solid black;
+      border-radius: 50%;
+      background: white;
+      box-sizing: border-box;
+      z-index: 1;
+    }
+
+    .ear-left, .ear-right {
+      position: absolute;
+      top: 55px;
+      width: 40px;
+      height: 40px;
+      border: 3px solid black;
+      border-radius: 50%;
+      background: transparent;
+      box-sizing: border-box;
+      z-index: 0;
+    }
+
+    .ear-left {
+      left: calc(50% - 100px);
+    }
+
+    .ear-right {
+      left: calc(50% + 61px);
+    }
+
+    .eyes {
+      display: flex;
+      gap: 20px;
+      z-index: 10;
+    }
+
+    .eye {
+      width: 50px;
+      height: 50px;
+      background: white;
+      border: 3px solid black;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .pupil {
+      width: 22px;
+      height: 22px;
+      background: black;
+      border-radius: 50%;
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      animation: lookAround 6s infinite ease-in-out;
+      z-index: 11;
+    }
+
+    @keyframes lookAround {
+      0%, 100% { top: 14px; left: 14px; }
+      25% { top: 5px; left: 5px; }
+      50% { top: 14px; left: 35px; }
+      75% { top: 35px; left: 14px; }
+    }
+
+    .button {
+      position: relative;
+      padding: 20px 30px;
+      border: none;
+      background-color: black;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      line-height: 1;
+      color: white;
+      box-shadow: inset 0 5px 10px -4px rgba(255, 255, 255, 0.15);
+      transition: transform 0.3s ease, color 0.3s ease;
+      text-align: center;
+      z-index: 10;
+      text-decoration: none;
+    }
+
+    .button:hover {
+      transform: scale(1.08);
+      color: red;
+    }
+
+    .title-img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-title {
+      font-size: 2rem;
+      margin: 20px;
+      font-family: 'BentonSans Black';
+    }
+    .nav-link.active-filter {
+  font-weight: bold;
+  color: red;
+  text-decoration: underline;
+}
+
+.nav-link.active-filter {
+  font-weight: bold !important;
+  color: red !important;
+  text-decoration: underline !important;
+}
+
+    /* MOBILE STYLES */
+ /* MOBILE STYLES */
+.mobile-header {
+  display: none;
+}
+
+@media (max-width: 750px) {
+  .mobile-header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: white;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
+  }
+
+  .right-column {
+    height: auto;
+    overflow-y: auto;
+    padding-top: 60px; /* Push content below mobile header */
+  }
+
+  .grid-wrapper {
+    grid-template-columns: 1fr; /* Only one column */
+  }
+
+  .middle-column {
+    display: none; /* Hide navigation on mobile */
+  }
+
+  /* Stack text and images vertically */
+  .details-and-more {
+    flex-direction: column;
+  }
+
+  .more-pictures {
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .more-pictures img {
+    width: 48%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+  }
+}
+
+
+
+.details-and-more {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+
+.project-title {
+  font-size: 2rem;
+  margin: 0 0 5px 0;
+  font-family: 'BentonSans Black', sans-serif;
+  line-height: 1;
+}
+
+.desc-grey {
+  color: grey;
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+ .desc-black {
+      color: black;
+      margin: 0 0 5px 0;
+      font-size: 1rem;
+      font-family: 'BentonSans Light', sans-serif;
+      
+    }
+
+    .desc-bold {
+      color: black;
+      margin: 0 0 5px 0;
+      font-size: 1rem;
+      font-weight: 600;
+            font-family: 'BentonSans Light', sans-serif;
+    }
+
+
+.desc-title {
+  color: black;
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: 600;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.left-details {
+  flex: 3.3;   /* Make text column smaller */
+  text-align: left;
+}
+
+.more-pictures {
+  flex: 4;   /* Make pictures column bigger */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.more-pictures img {
+  width: 100%;
+  height: auto;          /* Let height adjust based on width */
+  max-height: 80vh;      /* Max height relative to viewport height */
+  object-fit: cover;
+  aspect-ratio: 3 / 4;   /* Keep consistent ratio */
+  transition: height 0.3s ease;
+}
+body {
+    /* Make the body tall enough to scroll */
+    height: 200vh;
+  }
+  .right-column {
+  overflow-y: auto;
+  height: 100vh;
+  position: relative; /* to contain absolute/relative children */
+  padding: 20px; /* optional for breathing room */
+}
+
+.horizontal-scroll-container {
+  position: relative;  /* remove sticky */
+  height: 70vh;
+  width: 100%;        /* take full width of right column */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  display: flex;        /* small gap between slides */
+  margin: 0;
+  padding: 0;
+  scroll-padding-left: 0; /* prevent scroll snap offset */
+  scroll-padding-right: 0;
+  /* optional: hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.slide {
+  flex: 0 0 auto;
+  width: 80%;         /* smaller than container width to fit nicely */
+  height: 100%;
+  scroll-snap-align: start;
+  user-select: none;
+  pointer-events: none;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: auto;
+  user-select: auto;
+  display: block;
+}
+
+.you-may-also-like {
+      margin-top: 40px;
+    }
+
+    .you-may-also-like h2 {
+      font-family: 'BentonSans Black', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .you-may-also-like div {
+      display: flex;
+    }
+    .you-may-also-like .desc-title {
+  border-top: 2px solid black;
+  padding-top: 10px;
+  margin-top: 40px; /* give some space above */
+}
+
+.you-may-also-like img {
+  width: 33%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.03s ease;
+  cursor: pointer;
+  aspect-ratio: 3 / 2; /* Changed from 3/4 to 3/2 for shorter height */
+  max-height: 200px;   /* Optional max height to keep consistent smaller height */
+}
+
+    .you-may-also-like img:hover {
+      transform: scale(1.07);
+      border-radius: 8px;
+    }
+
+.carousel-wrapper {
+  position: relative; /* relative container for absolute buttons */
+  width: 100%;
+  height: 70vh; /* same height as your carousel container */
+}
+
+.horizontal-scroll-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  scrollbar-width: none; /* Firefox */
+  position: relative; /* keep if you want */
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+}
+
+
+#carousel-prev {
+  left: 10px;
+}
+
+#carousel-next {
+  right: 10px;
+}
+
+.carousel-button:hover {
+  background-color: #444;
+}
+
+
+
+ </style>
+</head>
+<body>
+  <!-- Mobile Floating Header -->
+  <div class="mobile-header">
+    <a href="../index.html" class="name-link">ALICIA LEE</a>
+  </div>
+
+  <div class="grid-wrapper">
+    <!-- LEFT COLUMN -->
+    <div class="middle-column">
+      <div>
+        <div class="name"> 
+          <a href="../index.html" class="name-link">ALICIA LEE</a>  
+        </div>
+
+        <div class="nav-links-container">
+          <a href="../index.html?filter=touch" class="nav-link filter-link" data-filter="touch">TOUCH</a>
+          <a href="../index.html?filter=feel" class="nav-link filter-link" data-filter="feel">FEEL</a>
+          <a href="../index.html?filter=see" class="nav-link filter-link" data-filter="see">SEE</a>
+        </div>
+      </div>
+
+      <div class="face-wrapper">
+        <div class="face">
+          <div class="face-circle"></div>
+          <div class="ear-left"></div>
+          <div class="ear-right"></div>
+          <div class="eyes">
+            <div class="eye"><div class="pupil"></div></div>
+            <div class="eye"><div class="pupil"></div></div>
+          </div>
+          <a button class="button" href="../About me/index.html">ME</button></a>        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+<div class="right-column">
+  <img class="title-img" src="Photos/Screenshot 2025-05-18 at 11.40.09 PM.png" alt="Image Placeholder" />
+  
+  <!-- Two columns container -->
+  <div class="details-and-more">
+    <!-- Left column: Title + description -->
+    <div class="left-details">
+      <div class="project-title">Swizzy the Snake</div>
+      <p class="desc-grey">Material</p>
+      <p class="desc-black">Coming Soon.</p>
+   <div class="desc-title"> More Details</div>
+   <p class="desc-black" > Coming Soon</p>
+    </div>
+    
+    <!-- Right column: More pictures -->
+    <div class="more-pictures">
+      <img src="Photos/Screenshot 2025-05-18 at 11.40.09 PM.png" alt="Extra image 1" />
+      <img src="Photos/Screenshot 2025-05-18 at 11.40.09 PM.png" alt="Extra image 2" />
+    </div>
+  </div>
+
+  <div class="desc-title"> Behind the Scenes</div>
+<div class="carousel-wrapper">
+  <div class="horizontal-scroll-container" id="carousel">
+    <div class="slide"><img src="Photos/Screenshot 2025-05-18 at 11.40.09 PM.png" alt="Slide 1"></div>
+    <div class="slide"><img src="Photos/Screenshot 2025-05-18 at 11.40.09 PM.png" alt="Slide 2"></div>
+    <div class="slide"><img src="Photos/Screenshot 2025-05-18 at 11.40.09 PM.png" alt="Slide 3"></div>
+  </div>
+  <button id="carousel-prev" class="carousel-button" aria-label="Previous slide">&#8249;</button>
+  <button id="carousel-next" class="carousel-button" aria-label="Next slide">&#8250;</button>
+</div>
+
+
+  <div class="you-may-also-like" aria-label="You may also like suggestions">
+    <div class="desc-title"> You May Also Like</div>
+    <div>
+      <img src="Photos/Screenshot 2025-05-18 at 11.40.09 PM.png" alt="Snake puzzle toy" />
+      <img src="Photos/Screenshot 2025-05-18 at 11.40.09 PM.png" alt="Custom leather parts" />
+      <img src="Photos/Screenshot 2025-05-18 at 11.40.09 PM.png" alt="Ceramic grill design" />
+    </div>
+  </div>
+</div>
+</div>
+
+
+  <script>
+  
+  const carousel = document.getElementById('carousel');
+const slides = carousel.querySelectorAll('.slide'); // Only slides, not buttons
+const prevButton = document.getElementById('carousel-prev');
+const nextButton = document.getElementById('carousel-next');
+
+const slideWidth = slides[0].offsetWidth + 20; // Slide width + gap (if any)
+
+prevButton.addEventListener('click', () => {
+  carousel.scrollBy({ left: -slideWidth, behavior: 'smooth' });
+});
+
+nextButton.addEventListener('click', () => {
+  carousel.scrollBy({ left: slideWidth, behavior: 'smooth' });
+});
+
+  </script>
+  
+  
+</body>
+</html>
